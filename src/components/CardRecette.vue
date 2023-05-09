@@ -1,13 +1,10 @@
 <template>
   <div class="card-recipe">
-    <h3>{{recipe.label}}</h3>
-      <!-- <p>30 min</p> -->
-      <p>{{time}}</p>
 <ul>
-    <li v-for="(ingredient, index) in recipe.ingredients" :key="index">
-      {{ingredient.text}}
+      <h4>{{recipe.recipe.label}}</h4>
+      <p>{{recipe.recipe.totalTime}} min</p>
+      <img :src="recipe.recipe.image" class="img" alt="Recipe Image">
 
-    </li>
 </ul>
 
   </div>
@@ -18,10 +15,6 @@
 	export default {
     name: 'CardRecette',
     props:{
-      Title : String,
-      picture : String,
-      time : String,
-      ingredients : Array,
       recipe : {
         type : Object,
         required : true
@@ -38,7 +31,12 @@
   border: 1px solid #ccc;
   border-radius: 5px;
   box-shadow: 0 2px 2px rgba(0,0,0,0.3);
+
 }
+.img{
+  width : 40%;
+}
+
 </style>
 
 

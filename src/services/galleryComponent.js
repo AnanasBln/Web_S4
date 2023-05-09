@@ -9,7 +9,7 @@ const getRecipeData = async function(){
         return response.json()
     }
     else {
-        new Error(response.statusText)
+        new Error(response.statusText)  
     }
 }
 export {getRecipeData}
