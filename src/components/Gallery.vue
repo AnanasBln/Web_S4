@@ -97,13 +97,97 @@ export default {
 
 <style scoped>
 
-.taille {
-  display: flex;
+.taille{
+  display : flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
-.test{
-  width: 20%;
+.recetteGallery {
+  background-color: #f0efef;
+  box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
+  border-radius: 20px;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.recetteGallery h3 {
+  font-size: 40px;
+  font-weight: bold;
+  color: #656565;
+  text-shadow: 1px 1px 2px #fff;
+  margin-bottom: 30px;
+}
+
+.search-bar {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.search-bar input[type="text"] {
+  width: 70%;
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
+  font-size: 20px;
+}
+
+.sort-select {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.sort-select select {
+  padding: 10px;
+  border: none;
+  border-radius: 10px;
+  box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
+  font-size: 20px;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.card-recipe {
+  flex-basis: calc(33.33% - 20px);
+  margin-bottom: 20px;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
+  background-color: #f0efef;
+}
+
+.card-recipe h4 {
+  font-size: 20px;
+  font-weight: bold;
+  color: #656565;
+  margin-top: 0;
+  margin-bottom: 5px;
+}
+
+.card-recipe p {
+  font-size: 16px;
+  color: #656565;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.card-recipe img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
 }
 
 
