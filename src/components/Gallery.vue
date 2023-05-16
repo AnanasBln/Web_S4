@@ -2,10 +2,10 @@
   <div class="recetteGallery">
     <h3>Recettes</h3>
 
-    <div class="search-bar">
+    <div class="searchBar">
       <input type="text" v-model="searchParam" placeholder="rechercher une recette">
     </div>
-    <div class="sort-select"> 
+    <div class="sortSelect"> 
       <select v-model="sortParam">
         <option value="alpha"> Ordre Alphabétique </option>
         <option value="time"> Le plus rapide </option>
@@ -14,8 +14,8 @@
     </div>
 
     <div class="gallery">
-      <div v-if="sortedRecipeData.length" class="taille">
-        <div class="test" v-for="(recipe, index) in filteredRecipeData.slice(0,20)" :key="index">
+      <div v-if="sortedRecipeData.length" class="length">
+        <div v-for="(recipe, index) in filteredRecipeData.slice(0,20)" :key="index">
             <CardRecette :recipe="recipe"/>
         </div>
       </div>
@@ -97,7 +97,7 @@ export default {
 
 <style scoped>
 
-.taille{
+.length{
   display : flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -120,14 +120,14 @@ export default {
   margin-bottom: 30px;
 }
 
-.search-bar {
+.searchBar {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.search-bar input[type="text"] {
+.searchBar input[type="text"] {
   width: 70%;
   padding: 10px;
   border: none;
@@ -136,13 +136,13 @@ export default {
   font-size: 20px;
 }
 
-.sort-select {
+.sortSelect {
   display: flex;
   justify-content: center;
   margin-bottom: 20px;
 }
 
-.sort-select select {
+.sortSelect select {
   padding: 10px;
   border: none;
   border-radius: 10px;
@@ -155,39 +155,6 @@ export default {
   justify-content: center;
   align-items: center;
   flex-wrap: wrap;
-}
-
-.card-recipe {
-  flex-basis: calc(33.33% - 20px);
-  margin-bottom: 20px;
-  padding: 10px;
-  border: none;
-  border-radius: 20px;
-  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
-  background-color: #f0efef;
-}
-
-.card-recipe h4 {
-  font-size: 20px;
-  font-weight: bold;
-  color: #656565;
-  margin-top: 0;
-  margin-bottom: 5px;
-}
-
-.card-recipe p {
-  font-size: 16px;
-  color: #656565;
-  margin-top: 0;
-  margin-bottom: 10px;
-}
-
-.card-recipe img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
-  box-shadow: 5px 5px 10px #d1d1d1, -5px -5px 10px #ffffff;
 }
 
 
