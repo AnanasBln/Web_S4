@@ -1,18 +1,23 @@
 <template>
 <div class="parentComponent">
-  <img class="logo" alt="Vue logo" src="./assets/logo_fork.png">
-    <Gallery/>
+<AppHeader title="Mon Application"/>
+    <Gallery />
+    <AppFooter/>
 </div>
 </template>
 
 
 <script>
 import Gallery from './components/Gallery'
+import AppHeader from './components/Header';
+import AppFooter from './components/Footer';
 
 export default {
   name: 'ParentComponent',
   components: {
-    Gallery
+    Gallery,
+    AppHeader,
+    AppFooter
 
   }
 }

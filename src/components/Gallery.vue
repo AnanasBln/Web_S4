@@ -2,21 +2,17 @@
   <div class="recetteGallery">
     <h3>Recettes</h3>
 
-    <div class="searchBar">
-      <input type="text" v-model="searchParam" placeholder="rechercher une recette">
-    </div>
-    <div class="sortSelect"> 
-      <select v-model="sortParam">
-        <option value="alpha"> Ordre Alphabétique </option>
-        <option value="time"> Le plus rapide </option>
-        <option value="calories"> Le moins calorique </option>
-      </select>
-    </div>
+ <SortSelect
+  :sort-param="sortParam"
+  @update:sort-param="updateSortParam"
+  :search-param="searchParam"
+  @update:search-param="updateSearchParam"
+/>
 
     <div class="gallery">
       <div v-if="sortedRecipeData.length" class="length">
         <div v-for="(recipe, index) in filteredRecipeData.slice(0,20)" :key="index">
-            <CardRecette :recipe="recipe"/>
+          <CardRecette :recipe="recipe"/>
         </div>
       </div>
       <div v-else>
@@ -27,72 +23,80 @@
 </template>
 
 <script>
-import {getRecipeData} from '../services/galleryComponent.js'
-import CardRecette from './CardRecette.vue'
+import { getRecipeData } from '../services/galleryComponent.js';
+import CardRecette from './CardRecette.vue';
+import SortSelect from './Sort.vue';
 
 export default {
   name: 'RecetteGallery',
-  components:{
-    CardRecette
+  components: {
+    CardRecette,
+    SortSelect
   },
-  data(){
-    return{
-      recipeData:[],
-      sortParam : 'time',
-      searchParam:'',
-      filteredRecipeData:[],
-      sortedRecipeData:[]
-    }
+  data() {
+   return {
+      recipeData: [],
+      sortParam: 'time',
+      searchParam: '',
+      filteredRecipeData: [],
+      sortedRecipeData: []
+    };
   },
-  created: function(){
-    this.retrieveRecipeData()
+mounted() {
+    this.retrieveRecipeData();
   },
-  methods:{
-    async retrieveRecipeData(){
+  methods: {
+    async retrieveRecipeData() {
       const data = await getRecipeData();
-      this.recipeData = data.hits;
-      console.log(data.hits);
-      this.sortRecipes();
-      console.log('Data received:', data);
-      console.log('Recipe data:',this.recipeData);
-
+      if (data && data.hits) {
+        this.recipeData = data.hits;
+        console.log('Data received:', data);
+        console.log('Recipe data:', this.recipeData);
+        this.sortRecipes();
+      } else {
+        console.error('Failed to retrieve recipe data.');
+      }
     },
-    sortRecipes(){
-      if(this.sortParam === 'alpha'){
-      this.sortedRecipeData = this.recipeData.sort((a,b)=>a.recipe.label.localeCompare(b.recipe.label));
-      }
-      else if(this.sortParam === 'time'){
-        this.sortedRecipeData = this.recipeData.sort((a,b)=>a.recipe.totalTime - b.recipe.totalTime);
-      }
-      else if(this.sortParam==='calories'){
-        this.sortedRecipeData = this.recipeData.sort((a,b)=>a.recipe.calories - b.recipe.calories)
-      }
-      this.filteredRecipeData=this.filterRecipe();
-
-    },
-    filterRecipe(){
-      if(this.searchParam.trim()===''){
-        return this.recipeData;
-      }
-      else{
-        const search = this.searchParam.trim().toLowerCase();
-        const filteredData = this.recipeData.filter(recipe =>
-        recipe.recipe.label.toLowerCase().includes(search)
-        );
-        return filteredData;
-      }
-      
+sortRecipes() {
+  this.sortedRecipeData = this.recipeData.slice();
+  this.sortedRecipeData.sort((a, b) => {
+    if (this.sortParam === 'alpha') {
+      return a.recipe.label.localeCompare(b.recipe.label);
+    } else if (this.sortParam === 'time') {
+      return a.recipe.totalTime - b.recipe.totalTime;
+    } else if (this.sortParam === 'calories') {
+      return a.recipe.calories - b.recipe.calories;
     }
+  });
+
+  this.filterRecipes(); 
+},
+    filterRecipes() {
+      if (this.searchParam.trim() === '') {
+        this.filteredRecipeData = this.sortedRecipeData;
+      } else {
+        const search = this.searchParam.trim().toLowerCase();
+        this.filteredRecipeData = this.sortedRecipeData.filter(recipe => {
+          return recipe.recipe.label.toLowerCase().includes(search);
+        });
+      }
+    },
+      updateSortParam(value) {
+    this.sortParam = value;
   },
-  watch:{
-    sortParam: function(){
+  updateSearchParam(value) {
+    this.searchParam = value;
+  }
+  },
+  watch: {
+    sortParam() {
       this.sortRecipes();
     },
-    searchParam:function(){
-      this.filteredRecipeData=this.filterRecipe();
+    searchParam() {
+      this.filterRecipes();
     }
   }
-}
+};
 </script>
 
 <style scoped>
@@ -120,35 +124,6 @@ export default {
   margin-bottom: 30px;
 }
 
-.searchBar {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.searchBar input[type="text"] {
-  width: 70%;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
-  font-size: 20px;
-}
-
-.sortSelect {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 20px;
-}
-
-.sortSelect select {
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  box-shadow: inset 5px 5px 10px #d1d1d1, inset -5px -5px 10px #ffffff;
-  font-size: 20px;
-}
 
 .gallery {
   display: flex;
