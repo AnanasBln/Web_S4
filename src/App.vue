@@ -1,9 +1,9 @@
 <template>
-<div class="parentComponent">
-<AppHeader title="Mon Application"/>
+  <div class="parentComponent">
+    <AppHeader title="Mon Application"/>  
     <Gallery />
     <AppFooter/>
-</div>
+  </div>
 </template>
 
 
@@ -18,7 +18,6 @@ export default {
     Gallery,
     AppHeader,
     AppFooter
-
   }
 }
 </script>
@@ -27,9 +26,4 @@ export default {
 
 
 <style scoped>
-
-.logo{
-  width:200px;
-}
-
 </style>

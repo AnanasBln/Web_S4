@@ -1,6 +1,7 @@
 <template>
-  <div class="cardRecipe">
-    <div class="card" @click="openPopup(recipe)">
+ <!-- card affichant le nom, la durée et l'image de la recette-->
+  <div class="cardRecipe"> 
+    <div class="card" @click="openPopup(recipe)"> <!-- évènement clic pour ouverture popup-->
       <ul>
         <h4>{{ recipe.recipe.label }}</h4>
         <p>{{ recipe.recipe.totalTime }} min</p>
@@ -8,9 +9,11 @@
       </ul>
     </div>
 
+
+    <!-- contenu de la fenêtre popup qui s'affiche quand showPopup est true-->
     <div v-if="showPopup" class="popup">
       <div class="popup-content">
-        <span class="close" @click="closePopup">&times;</span>
+        <span class="close" @click="closePopup">&times;</span> <!-- évènement clic pour fermeture popup-->
         <h2>{{ selectedRecipe.recipe.label }}</h2>
         <p>Temps de préparation : {{ selectedRecipe.recipe.totalTime }} min</p>
         <p>Nombre de portions : {{ selectedRecipe.recipe.yield }}</p>
@@ -24,6 +27,7 @@
     </div>
   </div>
 </template>
+
 
 <script>
 export default {
@@ -41,9 +45,10 @@ export default {
     };
   },
   methods: {
+    //appelé quand on clique sur une card
     openPopup(recipe) {
-      this.showPopup = true;
-      this.selectedRecipe = recipe;
+      this.showPopup = true; //met à jour showPopup 
+      this.selectedRecipe = recipe; //stock la recette selectionnée
     },
     closePopup() {
       this.showPopup = false;
@@ -52,11 +57,15 @@ export default {
 };
 </script>
 
+
+
+
 <style scoped>
 .cardRecipe {
   background-color: #F0F3F4;
   flex-basis: calc(33.33% - 20px);
   max-width: 200px;
+  height: 250px;
   border-radius: 16px;
   box-shadow: 
     -6px -6px 16px rgba(217, 217, 217, 0.8),

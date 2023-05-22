@@ -1,9 +1,11 @@
 <template>
   <div class="searchBar">
+    <!-- écoute de l'évènement input pour appeler handleSearchInputChange-->
     <input type="text" :value="searchParam" @input="handleSearchInputChange" placeholder="rechercher une recette">
   </div>
 
   <div class="sortSelect"> 
+    <!-- écoute de l'évènement change pour appeler handleSortOptionChange-->
     <select :value="sortParam" @change="handleSortOptionChange">
       <option value="alpha">Ordre Alphabétique</option>
       <option value="time">Le plus rapide</option>
@@ -11,6 +13,8 @@
     </select>
   </div>
 </template>
+
+
 
 <script>
 export default {
@@ -26,28 +30,40 @@ export default {
     }
   },
   methods: {
+
+    //appelé quand recherche change
     handleSearchInputChange(event) {
       const value = event.target.value;
-      this.$emit('update:searchParam', value);
-      this.saveSearchParam(value);
+      this.$emit('update:searchParam', value); //émet un évenement update:searchParam avec nouvelle valeur
+      this.saveSearchParam(value); //enregistre valeur dans stockage local
     },
+
+    //appelé quand option de tri change
     handleSortOptionChange(event) {
       const value = event.target.value;
-      this.$emit('update:sortParam', value);
-      this.saveSortOption(value);
+      this.$emit('update:sortParam', value); //émet un évenement update:searchParam avec nouvelle valeur
+      this.saveSortOption(value); //enregistre valeur dans stockage local
     },
+
+    //enregistre valeurs dans le stockage local
     saveSearchParam(value) {
       localStorage.setItem('searchParam', value);
     },
+
+    //enregistre valeurs dans le stockage local
     saveSortOption(value) {
       localStorage.setItem('sortOption', value);
     },
+
+    //récup valeur enregistrée et émet un évènement
     loadSearchParam() {
       const searchParam = localStorage.getItem('searchParam');
       if (searchParam) {
         this.$emit('update:searchParam', searchParam);
       }
     },
+
+    //récup valeur enregistrée et émet un évènement
     loadSortOption() {
       const sortOption = localStorage.getItem('sortOption');
       if (sortOption) {
@@ -55,12 +71,15 @@ export default {
       }
     }
   },
+  //hook pour initialiser valeurs de paramètres de tri et de recherche à partir du stockage local
   mounted() {
     this.loadSearchParam();
     this.loadSortOption();
   }
 };
 </script>
+
+
 
 <style scoped>
 .searchBar {

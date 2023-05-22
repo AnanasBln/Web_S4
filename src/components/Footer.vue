@@ -10,22 +10,26 @@
         </ul>
       </div>
       <div class="footer-links">
-        <h4>Liens sociaux</h4>
+        <h4>Réseaux sociaux</h4>
         <ul>
-          <li><a href="https://www.instagram.com/votre_instagram">Instagram</a></li>
-          <li><a href="https://www.linkedin.com/in/votre_profil">LinkedIn</a></li>
-          <li><a href="https://www.youtube.com/votre_chaine">YouTube</a></li>
+          <li><a href="https://instagram.com/anastbalan?igshid=MzNlNGNkZWQ4Mg==">Instagram</a></li>
+          <li><a href="https://www.linkedin.com/in/anastasiya-balan-6b50a2184/">LinkedIn</a></li>
+          <li><a href="https://www.youtube.com/@anastasiyabalan1297">YouTube</a></li>
         </ul>
       </div>
     </div>
   </footer>
 </template>
 
+
+
 <script>
 export default {
   name: 'AppFooter'
 }
 </script>
+
+
 
 <style scoped>
 .footer {
